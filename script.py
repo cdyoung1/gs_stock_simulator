@@ -1,10 +1,13 @@
 import requests
 import json
 
+client_id = "dd4f5d92f0f74a9daa0c0797b0599f41"
+client_secret = "83bc449a19bec7e893201ea52a36895b67b07bfd5d28cd528e430f0874b3e337"
+
 auth_data = {
     "grant_type"    : "client_credentials",
-    "client_id"     : "dd4f5d92f0f74a9daa0c0797b0599f41",
-    "client_secret" : "83bc449a19bec7e893201ea52a36895b67b07bfd5d28cd528e430f0874b3e337",
+    "client_id"     : client_id,
+    "client_secret" : client_secret,
     "scope"         : "read_product_data"
 }
 
@@ -13,26 +16,28 @@ session = requests.Session()
 
 auth_request = session.post("https://idfs.gs.com/as/token.oauth2", data = auth_data)
 access_token_dict = json.loads(auth_request.text)
-print(access_token_dict)
 access_token = access_token_dict["access_token"]
 
 # update session headers with access token
 session.headers.update({"Authorization":"Bearer "+ access_token})
 
-request_url = "https://api.marquee.gs.com/v1/data/USCANFPP_MINI/coverage"
-
-request_query = {
-                    "where": {
-                        "gsid": ["75154", "193067", "194688", "902608", "85627"]
-                    },
-                    "startDate": "2017-01-15",
-                    "endDate":"2018-01-15"
-               }
-
-request = session.get(url=request_url, json=request_query)
+coverage_url = "https://api.marquee.gs.com/v1/data/USCANFPP_MINI/coverage?limit=1000"
+request = session.get(url=coverage_url)
 results = json.loads(request.text)
-data_dict = dict()
+gsid_list = []
 
-# for 
+for c in results['results']:
+  gsid_list.append(c['gsid'])
 
-print(results)
+print(gsid_list)
+
+# assets_url = "https://api.marquee.gs.com/v1/assets?"
+
+# for i in range(2):
+#   separator = ("" if i == 0 else "&")
+#   assets_url += separator + "gsi=" + gsid_list[i]
+
+# assets_request = session.get(url=assets_url)
+# assets_results = json.loads(assets_request.text)
+
+# print(assets_results)
