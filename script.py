@@ -1,8 +1,11 @@
 import requests
 import json
 
-client_id = "dd4f5d92f0f74a9daa0c0797b0599f41"
-client_secret = "83bc449a19bec7e893201ea52a36895b67b07bfd5d28cd528e430f0874b3e337"
+# client_id = "dd4f5d92f0f74a9daa0c0797b0599f41"
+# client_secret = "83bc449a19bec7e893201ea52a36895b67b07bfd5d28cd528e430f0874b3e337"
+
+client_id = r'b07a38d8dc7747d9aa78335ed51237dc'
+client_secret = r'a8982c5a8d3c136773f33f36b725da11418b0820aeb1a05fa877c743bc8d482d'
 
 auth_data = {
     "grant_type"    : "client_credentials",
