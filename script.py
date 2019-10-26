@@ -34,13 +34,13 @@ for c in results['results']:
 
 print(gsid_list)
 
-# assets_url = "https://api.marquee.gs.com/v1/assets?"
+assets_url = "https://api.marquee.gs.com/v1/assets?"
 
-# for i in range(2):
-#   separator = ("" if i == 0 else "&")
-#   assets_url += separator + "gsi=" + gsid_list[i]
+for i in range(2):
+  separator = ("" if i == 0 else "&")
+  assets_url += separator + "gsi=" + gsid_list[i]
 
-# assets_request = session.get(url=assets_url)
-# assets_results = json.loads(assets_request.text)
+assets_request = session.get(url=assets_url)
+assets_results = json.loads(assets_request.text)
 
-# print(assets_results)
+print(assets_results)
